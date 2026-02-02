@@ -121,6 +121,10 @@ The API will be available at `http://localhost:3000`.
 └── README.md               # This file
 ```
 
+## Author
+
+-   **Azwar Riyadh Subarkah** - [sazwarriyadhs](https://github.com/sazwarriyadhs)
+
 ## License
 
 This project is licensed under the MIT License.bash

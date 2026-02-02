@@ -16,7 +16,7 @@
     "marketplace",
     "scraping"
   ],
-  "author": "Your Name",
+  "author": "Azwar Riyadh Subarkah",
   "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",
