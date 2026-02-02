@@ -1,42 +1,127 @@
-# Skinscanner (formerly MaestroAI)
+# Skin Price Aggregator
 
-## About the Project
+Skin price aggregator for MaestroAI/SkinScanner technical interview.
 
-**Skinscanner** is an application designed to collect and compare skin prices from various marketplaces. Its main goal is to help users find the best prices for the skins they are looking for quickly and efficiently.
-
-## Developer
-
-This project was developed by [sazwarriyadhs](https://github.com/sazwarriyadhs).
+A web service that aggregates skin prices from multiple marketplaces for games like Counter-Strike.
 
 ## Features
 
-For a complete list of available features, please see our [features document](./feature.md).
+- ✅ Scrapes prices from multiple marketplaces (Steam, BitSkins, Skinport)
+- ✅ Normalizes prices to USD for comparison
+- ✅ 60-second caching for performance
+- ✅ Error handling with stale cache fallback
+- ✅ Best deal calculation using a scoring algorithm
+- ✅ RESTful API with comprehensive endpoints
+- ✅ Batch processing support for multiple items
+- ✅ Dynamic marketplace registration
+- ✅ Rate limiting to prevent abuse
 
-## Application Flow
+## Technologies Used
 
-To understand how this application works, from data retrieval to displaying it to the user, please refer to the [application flow document](./flow.md).
+- **Backend:** Node.js, Express.js
+- **Web Scraping:** Axios, Cheerio
+- **Testing:** Jest
+- **Development:** Nodemon
 
-## Installation
+## Quick Start
 
-1.  Clone this repository:
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [npm](https://www.npmjs.com/)
+
+### Installation
+
+1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/sazwarriyadhs/skin-price-aggregator.git
-    ```
-2.  Navigate to the project directory:
-    ```bash
+    git clone https://github.com/your-username/skin-price-aggregator.git
     cd skin-price-aggregator
     ```
-3.  Install dependencies:
+
+2.  **Install dependencies:**
     ```bash
     npm install
     ```
 
-## Usage
+### Running the Application
 
-To run the application locally, use the following command:
+-   **Development Mode (with auto-reload):**
+    ```bash
+    npm run dev
+    ```
 
-```bash
-npm start
+-   **Production Mode:**
+    ```bash
+    npm start
+    ```
+
+-   **Running Tests:**
+    ```bash
+    npm test
+    ```
+
+The API will be available at `http://localhost:3000`.
+
+## API Endpoints
+
+### Health
+
+-   `GET /health`
+    -   Provides a detailed health check of the service, including uptime, memory usage, marketplace status, and cache statistics.
+
+### Prices
+
+-   `GET /api/prices?item=<skin_name>`
+    -   Fetches aggregated prices for a specific skin.
+    -   **Query Parameter:** `item` (required) - The name of the skin (e.g., `AK-47%20Redline`).
+
+-   `POST /api/prices/batch`
+    -   Fetches prices for multiple skins in a single request.
+    -   **Request Body:** `{ "items": ["<skin_name_1>", "<skin_name_2>"] }`
+
+### Marketplaces
+
+-   `GET /api/marketplaces`
+    -   Lists all configured marketplaces.
+
+-   `POST /api/marketplaces`
+    -   Dynamically adds a new (mock) marketplace.
+    -   **Request Body:** `{ "name": "NewMarket", "baseUrl": "https://newmarket.com" }`
+
+### Cache
+
+-   `GET /api/cache/stats`
+    -   Returns statistics about the cache, including hit rate and memory usage.
+
+-   `DELETE /api/cache`
+    -   Clears the entire cache.
+
+-   `DELETE /api/cache/:item`
+    -   Clears the cache for a specific item.
+
+### Service Stats
+
+-   `GET /api/stats`
+    -   Provides overall service statistics, including uptime and request counts.
+
+## Project Structure
+
+```
+/
+├── src/
+│   ├── marketplaces/       # Marketplace-specific scraping logic
+│   │   ├── BitSkinsMarket.js
+│   │   ├── SkinportMarket.js
+│   │   └── SteamMarket.js
+│   ├── aggregator.js       # Main aggregation logic
+│   ├── app.js              # Express server setup and routes
+│   └── cache.js            # In-memory caching implementation
+├── tests/                  # Unit and integration tests
+├── package.json            # Project dependencies and scripts
+└── README.md               # This file
 ```
 
-The application will run at `http://localhost:3000`.
+## License
+
+This project is licensed under the MIT License.bash
+npm install
