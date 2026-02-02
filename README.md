@@ -1,20 +1,56 @@
 # Skin Price Aggregator
 
-Skin price aggregator for MaestroAI/SkinScanner technical interview.
+Skin Price Aggregator for **MaestroAI / SkinScanner technical interview**.
 
-A web service that aggregates skin prices from multiple marketplaces for games like Counter-Strike.
+A lightweight web service that aggregates Counter-Strike skin prices from multiple marketplaces and returns normalized, comparable pricing data.
 
-## Features
+The primary focus of this project is **architecture, scalability, and failure isolation**, rather than aggressive scraping.
 
-- ✅ Scrapes prices from multiple marketplaces (Steam, BitSkins, Skinport)
-- ✅ Normalizes prices to USD for comparison
-- ✅ 60-second caching for performance
-- ✅ Error handling with stale cache fallback
-- ✅ Best deal calculation using a scoring algorithm
-- ✅ RESTful API with comprehensive endpoints
-- ✅ Batch processing support for multiple items
-- ✅ Dynamic marketplace registration
-- ✅ Rate limiting to prevent abuse
+---
+
+## 🎯 Goals
+
+- Aggregate skin prices from multiple marketplaces
+- Normalize heterogeneous marketplace data into a unified schema
+- Scale easily to 10+ marketplaces without core logic changes
+- Handle partial marketplace failures gracefully
+- Provide cheapest listing and a higher-quality “best deal” signal
+- Keep the solution simple, readable, and interview-friendly
+
+---
+
+## ✨ Features
+
+- ✅ Multiple marketplace support (Steam, BitSkins, Skinport)
+- ✅ Pluggable marketplace architecture
+- ✅ Normalized JSON output (price, currency, URL, timestamps)
+- ✅ Cheapest listing selection
+- ✅ Best deal scoring algorithm
+- ✅ Graceful error handling with partial results
+- ✅ 60-second in-memory caching
+- ✅ Batch price lookup
+- ✅ Dynamic marketplace registration (mock)
+- ✅ Basic rate limiting
+- ✅ RESTful API with health & stats endpoints
+
+---
+
+## 🧱 Architecture Overview
+
+The system is designed around a **pluggable marketplace architecture**.
+
+Each marketplace is implemented as an isolated adapter responsible for:
+- Fetching raw listing data
+- Normalizing results into a unified schema
+- Handling marketplace-specific errors internally
+
+The **aggregator** orchestrates concurrent requests to all registered marketplaces and:
+- Collects partial results
+- Computes the cheapest listing
+- Computes a “best deal” using a scoring function
+- Returns a single normalized response
+
+Marketplace failures are **isolated** and never cause the entire service to fail.
 
 ## Technologies Used
 
