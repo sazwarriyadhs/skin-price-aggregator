@@ -1,5 +1,7 @@
 # Skin Price Aggregator
+
 ![Dashboard Preview](ss.png)
+
 Skin Price Aggregator for **MaestroAI / SkinScanner technical interview**.
 
 A lightweight web service that aggregates Counter-Strike skin prices from multiple marketplaces and returns normalized, comparable pricing data.
